@@ -7,13 +7,13 @@ public:
         return parent[u]=find(parent[u],parent);
     }
     bool possibleBipartition(int n, vector<vector<int>>& dislikes) {
+        // Bipartite graph
         vector<int> parent(n+1);
-        for(int i=0;i<=n;i++) parent[i]=i;
-        for(auto x:dislikes){
-            bool u=x[0],v=x[1];
+        for(int i=1;i<=n;i++) parent[i]=i;
+        for(auto edge:dislikes){
+            int u=edge[0],v=edge[1];
             int pu=find(u,parent),pv=find(v,parent);
-            if(pu==pv) 
-                return false;
+            if(pu==pv) return false;
             parent[pu]=pv;
         }
         return true;
